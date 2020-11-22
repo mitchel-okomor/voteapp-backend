@@ -3,16 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();   
+
 
 
 //sRKyd4dCU7sP6M6
 const mongoUrl = process.env.MONGO_URL;
 mongoose.connect(mongoUrl, {
   useNewUrlParser:true,
-  useUnifiedTopology:true
+  useUnifiedTopology:true,
+  useCreateIndex:true
 });
 
 mongoose.connection.on("connected", ()=>{
@@ -25,11 +28,10 @@ mongoose.connection.on("error", ()=>{
 var usersRouter = require('./routes/votes');
 
 var app = express();
-
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

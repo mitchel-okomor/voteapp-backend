@@ -7,10 +7,11 @@ const user ={
 
 
   saveVote: (req,res)=>{
-    console.log(req.body.vote)
+    console.log(req.body)
         const vote = new Vote({
          name : req.body.name,
-         voteType:req.body.type
+         voteType:req.body.voteType,
+         token: req.body.token
         })
         vote.save()
         .then(data=>{

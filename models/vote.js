@@ -4,6 +4,6 @@ const voteSchema = new mongoose.Schema({
     name: String,
     voteType: {type:String, required:true},
     token: {type:String, index:true, unique:true, required:true},
-});
+}, { timestamps: true });
 
 mongoose.model("vote", voteSchema);
